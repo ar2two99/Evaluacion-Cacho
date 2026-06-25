@@ -34,14 +34,14 @@
             chkDado4 = new CheckBox();
             chkDado5 = new CheckBox();
             btnLanzar = new Button();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
-            pictureBox4 = new PictureBox();
-            pictureBox5 = new PictureBox();
+            pbDado1 = new PictureBox();
+            pbDado2 = new PictureBox();
+            pbDado5 = new PictureBox();
+            pbDado3 = new PictureBox();
+            pbDado4 = new PictureBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             btnBalas = new Button();
-            btnTontos = new Button();
+            btnTontas = new Button();
             btnTrenes = new Button();
             btnEscalera = new Button();
             btnFull = new Button();
@@ -52,11 +52,11 @@
             btnGrande1 = new Button();
             btnGrande2 = new Button();
             lblMensaje = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbDado1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbDado2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbDado5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbDado3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pbDado4).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -120,45 +120,55 @@
             btnLanzar.Text = "Lanzar dados";
             btnLanzar.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // pbDado1
             // 
-            pictureBox1.Location = new Point(30, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(100, 101);
-            pictureBox1.TabIndex = 6;
-            pictureBox1.TabStop = false;
+            pbDado1.Image = Properties.Resources.dado1;
+            pbDado1.Location = new Point(30, 12);
+            pbDado1.Name = "pbDado1";
+            pbDado1.Size = new Size(100, 101);
+            pbDado1.SizeMode = PictureBoxSizeMode.Zoom;
+            pbDado1.TabIndex = 6;
+            pbDado1.TabStop = false;
             // 
-            // pictureBox2
+            // pbDado2
             // 
-            pictureBox2.Location = new Point(191, 12);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(100, 101);
-            pictureBox2.TabIndex = 7;
-            pictureBox2.TabStop = false;
+            pbDado2.Image = Properties.Resources.dado2;
+            pbDado2.Location = new Point(191, 12);
+            pbDado2.Name = "pbDado2";
+            pbDado2.Size = new Size(100, 101);
+            pbDado2.SizeMode = PictureBoxSizeMode.Zoom;
+            pbDado2.TabIndex = 7;
+            pbDado2.TabStop = false;
             // 
-            // pictureBox3
+            // pbDado5
             // 
-            pictureBox3.Location = new Point(655, 12);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(100, 101);
-            pictureBox3.TabIndex = 8;
-            pictureBox3.TabStop = false;
+            pbDado5.Image = Properties.Resources.dado5;
+            pbDado5.Location = new Point(655, 12);
+            pbDado5.Name = "pbDado5";
+            pbDado5.Size = new Size(100, 101);
+            pbDado5.SizeMode = PictureBoxSizeMode.Zoom;
+            pbDado5.TabIndex = 8;
+            pbDado5.TabStop = false;
             // 
-            // pictureBox4
+            // pbDado3
             // 
-            pictureBox4.Location = new Point(348, 12);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(100, 101);
-            pictureBox4.TabIndex = 9;
-            pictureBox4.TabStop = false;
+            pbDado3.Image = Properties.Resources.dado3;
+            pbDado3.Location = new Point(348, 12);
+            pbDado3.Name = "pbDado3";
+            pbDado3.Size = new Size(100, 101);
+            pbDado3.SizeMode = PictureBoxSizeMode.Zoom;
+            pbDado3.TabIndex = 9;
+            pbDado3.TabStop = false;
             // 
-            // pictureBox5
+            // pbDado4
             // 
-            pictureBox5.Location = new Point(501, 12);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new Size(100, 101);
-            pictureBox5.TabIndex = 10;
-            pictureBox5.TabStop = false;
+            pbDado4.Image = Properties.Resources.dado4;
+            pbDado4.Location = new Point(501, 12);
+            pbDado4.Name = "pbDado4";
+            pbDado4.Size = new Size(100, 101);
+            pbDado4.SizeMode = PictureBoxSizeMode.Zoom;
+            pbDado4.TabIndex = 10;
+            pbDado4.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -167,7 +177,7 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.44371F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.44371F));
             tableLayoutPanel1.Controls.Add(btnBalas, 0, 0);
-            tableLayoutPanel1.Controls.Add(btnTontos, 0, 1);
+            tableLayoutPanel1.Controls.Add(btnTontas, 0, 1);
             tableLayoutPanel1.Controls.Add(btnTrenes, 0, 2);
             tableLayoutPanel1.Controls.Add(btnEscalera, 1, 0);
             tableLayoutPanel1.Controls.Add(btnFull, 1, 1);
@@ -199,15 +209,15 @@
             btnBalas.Text = "Balas (-)";
             btnBalas.UseVisualStyleBackColor = true;
             // 
-            // btnTontos
+            // btnTontas
             // 
-            btnTontos.Dock = DockStyle.Fill;
-            btnTontos.Location = new Point(3, 58);
-            btnTontos.Name = "btnTontos";
-            btnTontos.Size = new Size(195, 49);
-            btnTontos.TabIndex = 1;
-            btnTontos.Text = "Tontos (-)";
-            btnTontos.UseVisualStyleBackColor = true;
+            btnTontas.Dock = DockStyle.Fill;
+            btnTontas.Location = new Point(3, 58);
+            btnTontas.Name = "btnTontas";
+            btnTontas.Size = new Size(195, 49);
+            btnTontas.TabIndex = 1;
+            btnTontas.Text = "Tontos (-)";
+            btnTontas.UseVisualStyleBackColor = true;
             // 
             // btnTrenes
             // 
@@ -318,11 +328,11 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(tableLayoutPanel1);
-            Controls.Add(pictureBox5);
-            Controls.Add(pictureBox4);
-            Controls.Add(pictureBox3);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
+            Controls.Add(pbDado4);
+            Controls.Add(pbDado3);
+            Controls.Add(pbDado5);
+            Controls.Add(pbDado2);
+            Controls.Add(pbDado1);
             Controls.Add(btnLanzar);
             Controls.Add(chkDado5);
             Controls.Add(chkDado4);
@@ -331,11 +341,11 @@
             Controls.Add(chkDado1);
             Name = "Form1";
             Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbDado1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbDado2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbDado5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbDado3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pbDado4).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
@@ -350,14 +360,14 @@
         private CheckBox chkDado4;
         private CheckBox chkDado5;
         private Button btnLanzar;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox4;
-        private PictureBox pictureBox5;
+        private PictureBox pbDado1;
+        private PictureBox pbDado2;
+        private PictureBox pbDado5;
+        private PictureBox pbDado3;
+        private PictureBox pbDado4;
         private TableLayoutPanel tableLayoutPanel1;
         private Button btnBalas;
-        private Button btnTontos;
+        private Button btnTontas;
         private Button btnTrenes;
         private Button btnEscalera;
         private Button btnFull;
