@@ -70,7 +70,7 @@ namespace cacho_forms
 
             int escalera = misPuntajes.CalcularEscalera(misDados.Dados, misDados.FueDeMano, misDados.Tiros >=2);
             int full = misPuntajes.CalcularFull(misDados.Dados, misDados.FueDeMano, misDados.Tiros >=2);
-            int poker = misPuntajes.CalcularPoker(misDados.Dados, misDados.FueDeMano);
+            int poker = misPuntajes.CalcularPoker(misDados.Dados, misDados.FueDeMano, misDados.Tiros >=2);
             int grande = misPuntajes.CalcularGrande(misDados.Dados, misDados.FueDeMano, misDados.Tiros >=2);
 
             // Revisar según jugador actual y casillas disponibles
@@ -366,7 +366,7 @@ namespace cacho_forms
         private void btnPoker_Click(object sender, EventArgs e)
         {
             if (jugadorActual == 2) return;
-            int puntos = misPuntajes.CalcularPoker(misDados.Dados, misDados.FueDeMano);
+            int puntos = misPuntajes.CalcularPoker(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
             btnPoker.Text = $"Poker ({puntos})";
             usadoPokerJ1 = true;
             SiguienteTurno();
@@ -466,7 +466,7 @@ namespace cacho_forms
         private void btnPokerJ2_Click(object sender, EventArgs e)
         {
             if (jugadorActual == 1) return;
-            int puntos = misPuntajes.CalcularPoker(misDados.Dados, misDados.FueDeMano);
+            int puntos = misPuntajes.CalcularPoker(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
             btnPokerJ2.Text = $"Poker ({puntos})";
             usadoPokerJ2 = true;
             SiguienteTurno();

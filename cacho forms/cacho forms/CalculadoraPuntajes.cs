@@ -120,17 +120,37 @@ public class CalculadoraPuntajes
     }
 
     // logicapoker
-    public int CalcularPoker(int[] dados, bool fueDeMano)
+    public int CalcularPoker(int[] dados, bool fueDeMano, bool permitirVuelcos)
     {
-        bool esPoker = dados.GroupBy(d => d).Any(g => g.Count() >= 4);
+        // Primero revisamos Poker natural
+        bool esPokerNatural = dados.GroupBy(d => d).Any(g => g.Count() >= 4);
 
-        if (!esPoker)
+        if (esPokerNatural)
+        {
+            return fueDeMano ? 45 : 40;
+        }
+
+        // Si todavía no se permiten vuelcos, devuelve 0
+        if (!permitirVuelcos)
         {
             return 0;
         }
 
-        return fueDeMano ? 45 : 40;
+        // Revisamos Poker usando máximo 2 vuelcos
+        foreach (int[] variante in GenerarVariantesConVuelcos(dados))
+        {
+            bool esPoker = variante.GroupBy(d => d).Any(g => g.Count() >= 4);
+
+            if (esPoker)
+            {
+                return 40;
+            }
+        }
+
+        return 0;
     }
+
+
 
     // grandeishon
     public bool EsGrande(int[] dados)
