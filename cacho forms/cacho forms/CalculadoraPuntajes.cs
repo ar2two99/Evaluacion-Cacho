@@ -58,7 +58,17 @@ public class CalculadoraPuntajes
     // estructura 123456
     public int CalcularNumeros(int[] dados, int numero)
     {
-        return dados.Count(d => d == numero) * numero;
+        int cantidadNaturales = dados.Count(d => d == numero);
+
+        int numeroOpuesto = 7 - numero;
+        int cantidadVolteables = dados.Count(d => d == numeroOpuesto);
+
+        // Máximo se pueden volcar 2 dados
+        int volcadosUsados = Math.Min(cantidadVolteables, 2);
+
+        int cantidadTotal = cantidadNaturales + volcadosUsados;
+
+        return cantidadTotal * numero;
     }
 
     // escala
