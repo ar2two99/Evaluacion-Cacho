@@ -252,6 +252,7 @@
             // btnEscalera
             // 
             btnEscalera.Dock = DockStyle.Fill;
+            btnEscalera.ImageAlign = ContentAlignment.BottomRight;
             btnEscalera.Location = new Point(136, 3);
             btnEscalera.Name = "btnEscalera";
             btnEscalera.Size = new Size(128, 43);

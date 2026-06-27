@@ -208,7 +208,7 @@ namespace cacho_forms
             MarcarMejorJugada();
             PintarMejorJugada();
 
-            if (misDados.Tiros >= 2)
+            if (misDados.Tiros >= 2) // Verificar tiros.
             {
                 btnLanzar.Enabled = false;
                 lblMensaje.Text = $"Jugador {jugadorActual}: marca una casilla para terminar tu turno";
