@@ -7,12 +7,17 @@ namespace cacho_forms
     public partial class Form1 : Form
     {
         // VARIABLES Clases
-     
+
         ControladorDados misDados = new ControladorDados();
         CalculadoraPuntajes misPuntajes = new CalculadoraPuntajes();
 
         // limitador casillas
         int jugadorActual = 1;
+
+        // Puntuaciones y control de fin de juego
+        int puntajeTotalJ1 = 0;
+        int puntajeTotalJ2 = 0;
+        int turnosCompletados = 0; // Llegará a 22 al final de la partida
 
         bool usadoBalasJ1 = false;
         bool usadoTontasJ1 = false;
@@ -52,9 +57,9 @@ namespace cacho_forms
             lblDormida.Text = "";
             lblDormida.ForeColor = Color.DarkRed;
         }
-            private void MarcarMejorJugada()
+        private void MarcarMejorJugada()
         {
-         
+
             LimpiarColoresBotones();
 
             mejorJugadaActual = "";
@@ -68,10 +73,10 @@ namespace cacho_forms
             int quinas = misPuntajes.CalcularNumeros(misDados.Dados, 5);
             int senas = misPuntajes.CalcularNumeros(misDados.Dados, 6);
 
-            int escalera = misPuntajes.CalcularEscalera(misDados.Dados, misDados.FueDeMano, misDados.Tiros >=2);
-            int full = misPuntajes.CalcularFull(misDados.Dados, misDados.FueDeMano, misDados.Tiros >=2);
-            int poker = misPuntajes.CalcularPoker(misDados.Dados, misDados.FueDeMano, misDados.Tiros >=2);
-            int grande = misPuntajes.CalcularGrande(misDados.Dados, misDados.FueDeMano, misDados.Tiros >=2);
+            int escalera = misPuntajes.CalcularEscalera(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            int full = misPuntajes.CalcularFull(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            int poker = misPuntajes.CalcularPoker(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            int grande = misPuntajes.CalcularGrande(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
 
             // Revisar según jugador actual y casillas disponibles
             if (jugadorActual == 1)
@@ -174,9 +179,9 @@ namespace cacho_forms
             }
         }
 
-        
 
-               private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e) { }
         private void chkdado3_CheckedChanged(object sender, EventArgs e) { }
         private void button4_Click(object sender, EventArgs e) { }
         private void button7_Click(object sender, EventArgs e) { }
@@ -231,6 +236,17 @@ namespace cacho_forms
         // turmo siguiente
         private void SiguienteTurno()
         {
+            {
+                turnosCompletados++; // Sumamos un turno jugado
+
+                // Verificamos si ya se llenaron todas las casillas (11 por jugador = 22)
+                if (turnosCompletados >= 22)
+                {
+                    TerminarJuego();
+                    return; // Salimos de la función para que no le pase el turno al Jugador
+                }
+            }
+
             misDados.ResetearTurno();
             btnLanzar.Enabled = true;
             // Limpiar dados
@@ -293,8 +309,9 @@ namespace cacho_forms
         // casillas j1
         private void btnBalas_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 1);
+            puntajeTotalJ1 += puntos;
             btnBalas.Text = $"Balas ({puntos})";
             usadoBalasJ1 = true;
             SiguienteTurno();
@@ -302,8 +319,9 @@ namespace cacho_forms
 
         private void btnTontas_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 2);
+            puntajeTotalJ1 += puntos;
             btnTontas.Text = $"Tontos ({puntos})";
             usadoTontasJ1 = true;
             SiguienteTurno();
@@ -311,8 +329,9 @@ namespace cacho_forms
 
         private void btnTrenes_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 3);
+            puntajeTotalJ1 += puntos;
             btnTrenes.Text = $"Trenes ({puntos})";
             usadoTrenesJ1 = true;
             SiguienteTurno();
@@ -320,8 +339,9 @@ namespace cacho_forms
 
         private void btnCuadras_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 4);
+            puntajeTotalJ1 += puntos;
             btnCuadras.Text = $"Cuadras ({puntos})";
             usadoCuadrasJ1 = true;
             SiguienteTurno();
@@ -329,8 +349,9 @@ namespace cacho_forms
 
         private void btnQuinas_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 5);
+            puntajeTotalJ1 += puntos;
             btnQuinas.Text = $"Quinas ({puntos})";
             usadoQuinasJ1 = true;
             SiguienteTurno();
@@ -338,8 +359,9 @@ namespace cacho_forms
 
         private void btnSenas_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 6);
+            puntajeTotalJ1 += puntos;
             btnSenas.Text = $"Senas ({puntos})";
             usadoSenasJ1 = true;
             SiguienteTurno();
@@ -347,8 +369,9 @@ namespace cacho_forms
 
         private void btnEscalera_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularEscalera(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            puntajeTotalJ1 += puntos;
             btnEscalera.Text = $"Escalera ({puntos})";
             usadoEscaleraJ1 = true;
             SiguienteTurno();
@@ -356,8 +379,9 @@ namespace cacho_forms
 
         private void btnFull_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularFull(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            puntajeTotalJ1 += puntos;
             btnFull.Text = $"Full ({puntos})";
             usadoFullJ1 = true;
             SiguienteTurno();
@@ -365,8 +389,9 @@ namespace cacho_forms
 
         private void btnPoker_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularPoker(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            puntajeTotalJ1 += puntos;
             btnPoker.Text = $"Poker ({puntos})";
             usadoPokerJ1 = true;
             SiguienteTurno();
@@ -374,8 +399,9 @@ namespace cacho_forms
 
         private void btnGrande1_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
-            int puntos = misPuntajes.CalcularGrande(misDados.Dados,misDados.FueDeMano, misDados.Tiros >=2);
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
+            int puntos = misPuntajes.CalcularGrande(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            puntajeTotalJ1 += puntos;
             btnGrande1.Text = $"Grande ({puntos})";
             usadoGrande1J1 = true;
             SiguienteTurno();
@@ -383,8 +409,9 @@ namespace cacho_forms
 
         private void btnGrande2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 2) return;
-            int puntos = misPuntajes.CalcularGrande(misDados.Dados,misDados.FueDeMano, misDados.Tiros >=2);
+            if (jugadorActual == 2 || misDados.Tiros == 0) return;
+            int puntos = misPuntajes.CalcularGrande(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            puntajeTotalJ1 += puntos;
             btnGrande2.Text = $"Grande ({puntos})";
             usadoGrande2J1 = true;
             SiguienteTurno();
@@ -393,8 +420,9 @@ namespace cacho_forms
         // casillas j2
         private void btnBalasJ2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 1);
+            puntajeTotalJ2 += puntos;
             btnBalasJ2.Text = $"Balas ({puntos})";
             usadoBalasJ2 = true;
             SiguienteTurno();
@@ -402,8 +430,9 @@ namespace cacho_forms
 
         private void btnTontasJ2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 2);
+            puntajeTotalJ2 += puntos;
             btnTontasJ2.Text = $"Tontos ({puntos})";
             usadoTontasJ2 = true;
             SiguienteTurno();
@@ -411,8 +440,9 @@ namespace cacho_forms
 
         private void btnTrenesJ2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 3);
+            puntajeTotalJ2 += puntos;
             btnTrenesJ2.Text = $"Trenes ({puntos})";
             usadoTrenesJ2 = true;
             SiguienteTurno();
@@ -420,8 +450,9 @@ namespace cacho_forms
 
         private void btnCuadrasJ2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 4);
+            puntajeTotalJ2 += puntos;
             btnCuadrasJ2.Text = $"Cuadras ({puntos})";
             usadoCuadrasJ2 = true;
             SiguienteTurno();
@@ -429,8 +460,9 @@ namespace cacho_forms
 
         private void btnQuinasJ2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 5);
+            puntajeTotalJ2 += puntos;
             btnQuinasJ2.Text = $"Quinas ({puntos})";
             usadoQuinasJ2 = true;
             SiguienteTurno();
@@ -438,8 +470,9 @@ namespace cacho_forms
 
         private void btnSenasJ2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularNumeros(misDados.Dados, 6);
+            puntajeTotalJ2 += puntos;
             btnSenasJ2.Text = $"Senas ({puntos})";
             usadoSenasJ2 = true;
             SiguienteTurno();
@@ -447,8 +480,9 @@ namespace cacho_forms
 
         private void btnEscaleraJ2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularEscalera(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            puntajeTotalJ2 += puntos;
             btnEscaleraJ2.Text = $"Escalera ({puntos})";
             usadoEscaleraJ2 = true;
             SiguienteTurno();
@@ -456,8 +490,9 @@ namespace cacho_forms
 
         private void btnFullJ2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularFull(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            puntajeTotalJ2 += puntos;
             btnFullJ2.Text = $"Full ({puntos})";
             usadoFullJ2 = true;
             SiguienteTurno();
@@ -465,8 +500,9 @@ namespace cacho_forms
 
         private void btnPokerJ2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
             int puntos = misPuntajes.CalcularPoker(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            puntajeTotalJ2 += puntos;
             btnPokerJ2.Text = $"Poker ({puntos})";
             usadoPokerJ2 = true;
             SiguienteTurno();
@@ -474,8 +510,9 @@ namespace cacho_forms
 
         private void btnGrande1J2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
-            int puntos = misPuntajes.CalcularGrande(misDados.Dados,misDados.FueDeMano, misDados.Tiros >= 2);
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
+            int puntos = misPuntajes.CalcularGrande(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            puntajeTotalJ2 += puntos;
             btnGrande1J2.Text = $"Grande ({puntos})";
             usadoGrande1J2 = true;
             SiguienteTurno();
@@ -483,8 +520,9 @@ namespace cacho_forms
 
         private void btnGrande2J2_Click(object sender, EventArgs e)
         {
-            if (jugadorActual == 1) return;
-            int puntos = misPuntajes.CalcularGrande(misDados.Dados,misDados.FueDeMano, misDados.Tiros >=2 );
+            if (jugadorActual == 1 || misDados.Tiros == 0) return;
+            int puntos = misPuntajes.CalcularGrande(misDados.Dados, misDados.FueDeMano, misDados.Tiros >= 2);
+            puntajeTotalJ2 += puntos;
             btnGrande2J2.Text = $"Grande ({puntos})";
             usadoGrande2J2 = true;
             SiguienteTurno();
@@ -503,7 +541,87 @@ namespace cacho_forms
                 case 6: pb.Image = Properties.Resources.dado6; break;
             }
         }
+        private void TerminarJuego()
+        {
+            btnLanzar.Enabled = false;
+            LimpiarColoresBotones();
 
-      
+            string ganador = "";
+            if (puntajeTotalJ1 > puntajeTotalJ2)
+            {
+                ganador = "¡GANÓ EL JUGADOR 1!";
+            }
+            else if (puntajeTotalJ2 > puntajeTotalJ1)
+            {
+                ganador = "¡GANÓ EL JUGADOR 2!";
+            }
+            else
+            {
+                ganador = "¡ES UN EMPATE!";
+            }
+
+            lblMensaje.Text = $"FIN DEL JUEGO. {ganador} (J1: {puntajeTotalJ1} pts | J2: {puntajeTotalJ2} pts)";
+            lblMensaje.ForeColor = Color.Purple;
+
+            btnReiniciar.Visible = true;
+        }
+
+        private void btnReiniciar_Click(object sender, EventArgs e)
+        {
+            ReiniciarJuego();
+        }
+
+        private void ReiniciarJuego()
+        {
+            // 1. Reiniciar variables globales
+            jugadorActual = 1;
+            puntajeTotalJ1 = 0;
+            puntajeTotalJ2 = 0;
+            turnosCompletados = 0;
+            mejorJugadaActual = "";
+            mejorPuntajeActual = 0;
+
+            // 2. Reiniciar los booleanos del Jugador 1
+            usadoBalasJ1 = false; usadoTontasJ1 = false; usadoTrenesJ1 = false;
+            usadoCuadrasJ1 = false; usadoQuinasJ1 = false; usadoSenasJ1 = false;
+            usadoEscaleraJ1 = false; usadoFullJ1 = false; usadoPokerJ1 = false;
+            usadoGrande1J1 = false; usadoGrande2J1 = false;
+
+            // 3. Reiniciar los booleanos del Jugador 2
+            usadoBalasJ2 = false; usadoTontasJ2 = false; usadoTrenesJ2 = false;
+            usadoCuadrasJ2 = false; usadoQuinasJ2 = false; usadoSenasJ2 = false;
+            usadoEscaleraJ2 = false; usadoFullJ2 = false; usadoPokerJ2 = false;
+            usadoGrande1J2 = false; usadoGrande2J2 = false;
+
+            // 4. Restaurar los textos originales de los botones (J1)
+            btnBalas.Text = "Balas"; btnTontas.Text = "Tontas"; btnTrenes.Text = "Trenes";
+            btnCuadras.Text = "Cuadras"; btnQuinas.Text = "Quinas"; btnSenas.Text = "Senas";
+            btnEscalera.Text = "Escalera"; btnFull.Text = "Full"; btnPoker.Text = "Poker";
+            btnGrande1.Text = "Grande 1"; btnGrande2.Text = "Grande 2";
+
+            // 5. Restaurar los textos originales de los botones (J2)
+            btnBalasJ2.Text = "Balas"; btnTontasJ2.Text = "Tontas"; btnTrenesJ2.Text = "Trenes";
+            btnCuadrasJ2.Text = "Cuadras"; btnQuinasJ2.Text = "Quinas"; btnSenasJ2.Text = "Senas";
+            btnEscaleraJ2.Text = "Escalera"; btnFullJ2.Text = "Full"; btnPokerJ2.Text = "Poker";
+            btnGrande1J2.Text = "Grande 1"; btnGrande2J2.Text = "Grande 2";
+
+            // 6. Limpiar dados y lógica interna
+            chkDado1.Checked = false; chkDado2.Checked = false;
+            chkDado3.Checked = false; chkDado4.Checked = false; chkDado5.Checked = false;
+
+            misDados.ResetearTurno();
+            LimpiarColoresBotones();
+
+            // 7. Restaurar la interfaz inicial
+            btnLanzar.Enabled = true;
+            lblMensaje.Text = "Jugador uno juega";
+            lblMensaje.ForeColor = Color.Blue;
+            lblDormida.Text = "";
+
+            // 8. Refrescar el estado visual de los botones
+            ActualizarBotonesTurno();
+
+            btnReiniciar.Visible = false;
+        }
     }
 }

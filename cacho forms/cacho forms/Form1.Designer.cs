@@ -67,6 +67,7 @@
             lblDormida = new Label();
             label1 = new Label();
             label2 = new Label();
+            btnReiniciar = new Button();
             ((System.ComponentModel.ISupportInitialize)pbDado1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbDado2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbDado5).BeginInit();
@@ -525,11 +526,23 @@
             label2.TabIndex = 15;
             label2.Text = "JUGADOR 2";
             // 
+            // btnReiniciar
+            // 
+            btnReiniciar.Location = new Point(433, 403);
+            btnReiniciar.Name = "btnReiniciar";
+            btnReiniciar.Size = new Size(75, 23);
+            btnReiniciar.TabIndex = 16;
+            btnReiniciar.Text = "Reiniciar";
+            btnReiniciar.UseVisualStyleBackColor = true;
+            btnReiniciar.Visible = false;
+            btnReiniciar.Click += btnReiniciar_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(902, 450);
+            Controls.Add(btnReiniciar);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(tableLayoutPanel2);
@@ -601,5 +614,6 @@
         private Label lblDormida;
         private Label label1;
         private Label label2;
+        private Button btnReiniciar;
     }
 }
